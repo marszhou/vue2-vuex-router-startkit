@@ -36,12 +36,10 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  // debugger
   next()
 })
 
 router.afterEach(route => {
-  // debugger
 })
 
 window.router = router
