@@ -14,7 +14,8 @@
     "vue": "^2.1.0",
     "vue-color": "^2.0.5",
     "vue-router": "^2.1.1",
-    "vuex": "^2.1.1"
+    "vuex": "^2.1.1",
+    "vuex-router-sync": "^4.1.0"
   },
   "devDependencies": {
     "argv": "0.0.2",
