@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import Home from 'pages/home'
+import Foo from 'pages/foo'
+import Bar from 'pages/bar'
 
 const router = new VueRouter({
   mode: 'history',
@@ -11,7 +13,20 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      component: Home
+      component: Home,
+      name: 'home'
+    },
+    {
+      path: '/foo',
+      component: Foo,
+      name: 'foo',
+      children: [
+        {
+          path: 'bar',
+          component: Bar,
+          name: 'bar'
+        }
+      ]
     }
   ]
 })
