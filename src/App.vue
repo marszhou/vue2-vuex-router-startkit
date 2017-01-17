@@ -1,16 +1,18 @@
 <template>
   <div id="app">
     <counter/>
+    <foo/>
   </div>
 </template>
 
 <script>
 import Counter from 'components/counter'
+import Foo from 'components/examples/foo'
 
 export default {
   name: 'app',
   components: {
-    Counter
+    Counter, Foo
   },
   mounted() {
     let loadingEle = document.querySelector('#landing_loading')

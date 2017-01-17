@@ -1,7 +1,7 @@
 import {foo as types} from '../mutation-types'
 import {resourceMapping} from 'utils/func'
 
-const prefix = 'foo/'
+const prefix = 'foo_'
 const state = {
   items: []
 }
@@ -12,14 +12,18 @@ const getters = {
   }, prefix)
 }
 
-console.log(getters)
-
 const actions = {
-
+  ...resourceMapping({
+    add({ commit }, item) {
+      commit(types.add, item)
+    }
+  }, prefix)
 }
 
 const mutations = {
-
+  [types.add] (state, item) {
+    state.items.push(item)
+  }
 }
 
 export default {
