@@ -2,6 +2,7 @@
   <div id="app">
     <counter/>
     <foo/>
+    <router-view/>
   </div>
 </template>
 

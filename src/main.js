@@ -6,26 +6,28 @@ import App from './App'
 require('bootstrap/dist/css/bootstrap.css')
 require('bootstrap/dist/js/bootstrap.js')
 
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
-
+import router from './routes'
+import {sync} from 'vuex-router-sync'
 import store from './store/store'
 
-Vue.filter('translate', (v) => `translate(${v})`)
-Vue.filter('embrace', (v, func, ...params) => `${func}(${v}${params.length > 0 ? ',' + params.join(',') : ''})`)
+sync(store, router)
 
-Vue.mixin({
-  methods: {
-    $$dispatch(eventName, args) {
-      var argsCopy = Array.prototype.slice.call(args)
-      argsCopy.unshift(eventName)
-      this.$dispatch.apply(this, argsCopy)
-    }
-  }
-})
+// Vue.filter('translate', (v) => `translate(${v})`)
+// Vue.filter('embrace', (v, func, ...params) => `${func}(${v}${params.length > 0 ? ',' + params.join(',') : ''})`)
+
+// Vue.mixin({
+//   methods: {
+//     $$dispatch(eventName, args) {
+//       var argsCopy = Array.prototype.slice.call(args)
+//       argsCopy.unshift(eventName)
+//       this.$dispatch.apply(this, argsCopy)
+//     }
+//   }
+// })
 
 /* eslint-disable no-new */
 new Vue({
+  router,
   store,
   el: 'app',
   template: '<App/>',
