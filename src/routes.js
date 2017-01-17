@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
+import {sync} from 'vuex-router-sync'
 
 import Home from 'pages/home'
 import Foo from 'pages/foo'
@@ -26,22 +27,25 @@ const routes = [
   }
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  scrollBehavior: (to, from, savedPosition) => {
-    return {x: 0, y: 0}
-  },
-  linkActiveClass: 'current',
-  routes: routes
-})
+module.exports = (store) => {
+  const router = new VueRouter({
+    mode: 'history',
+    scrollBehavior: (to, from, savedPosition) => {
+      return {x: 0, y: 0}
+    },
+    linkActiveClass: 'current',
+    routes: routes
+  })
 
-router.beforeEach((to, from, next) => {
-  next()
-})
+  router.beforeEach((to, from, next) => {
+    next()
+  })
 
-router.afterEach(route => {
-})
+  router.afterEach(route => {
+  })
 
-window.router = router
+  window.router = router
+  sync(store, router)
 
-export default router
+  return router
+}
