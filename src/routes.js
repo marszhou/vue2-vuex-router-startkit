@@ -6,6 +6,8 @@ import Home from 'pages/home'
 
 const router = new VueRouter({
   mode: 'history',
+  scrollBehavior: true,
+  linkActiveClass: 'current',
   routes: [
     {
       path: '/',
