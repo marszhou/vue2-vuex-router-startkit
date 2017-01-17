@@ -6,9 +6,9 @@ import App from './App'
 require('bootstrap/dist/css/bootstrap.css')
 require('bootstrap/dist/js/bootstrap.js')
 
+import store from './store/store'
 import router from './routes'
 import {sync} from 'vuex-router-sync'
-import store from './store/store'
 
 sync(store, router)
 

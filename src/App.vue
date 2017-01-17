@@ -3,6 +3,9 @@
     <counter/>
     <foo/>
     <router-view/>
+    <router-link :to='{name: "foo"}'>foo</router-link>
+    <router-link :to='{name: "bar"}'>bar</router-link>
+    <router-link :to='{name: "home"}'>home</router-link>
   </div>
 </template>
 

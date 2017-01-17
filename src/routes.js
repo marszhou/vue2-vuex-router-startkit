@@ -6,29 +6,44 @@ import Home from 'pages/home'
 import Foo from 'pages/foo'
 import Bar from 'pages/bar'
 
+const routes = [
+  {
+    path: '/',
+    component: Home,
+    name: 'home'
+  },
+  {
+    path: '/foo',
+    component: Foo,
+    name: 'foo',
+    children: [
+      {
+        path: 'bar',
+        component: Bar,
+        name: 'bar'
+      }
+    ]
+  }
+]
+
 const router = new VueRouter({
   mode: 'history',
-  scrollBehavior: true,
+  scrollBehavior: (to, from, savedPosition) => {
+    return {x: 0, y: 0}
+  },
   linkActiveClass: 'current',
-  routes: [
-    {
-      path: '/',
-      component: Home,
-      name: 'home'
-    },
-    {
-      path: '/foo',
-      component: Foo,
-      name: 'foo',
-      children: [
-        {
-          path: 'bar',
-          component: Bar,
-          name: 'bar'
-        }
-      ]
-    }
-  ]
+  routes: routes
 })
+
+router.beforeEach((to, from, next) => {
+  // debugger
+  next()
+})
+
+router.afterEach(route => {
+  // debugger
+})
+
+window.router = router
 
 export default router
