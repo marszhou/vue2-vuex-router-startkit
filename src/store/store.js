@@ -51,5 +51,17 @@ export default new Vuex.Store({
     foo
   },
   strict: debug,
-  plugins: debug ? [createLogger()] : []
+  plugins: debug ? [
+    createLogger({
+      collapsed: false,
+      // transformer(state) {
+      //   return state.count
+      // },
+      ignored(type) {
+        return [
+          'router/ROUTE_CHANGED'
+        ].indexOf(type) > -1
+      }
+    })
+  ] : []
 })
