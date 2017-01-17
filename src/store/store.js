@@ -43,9 +43,12 @@ const getters = {
 }
 // -- end
 
+import foo from './modules/foo'
+
 export default new Vuex.Store({
   state, mutations, actions, getters,
   modules: {
+    foo
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []
