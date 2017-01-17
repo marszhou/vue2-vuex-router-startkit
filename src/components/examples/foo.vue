@@ -4,26 +4,31 @@
   <li v-for='item of items'>{{item}}</li>
 </ul>
 <button @click='foo_add(Math.random())'>add</button>
+<button @click='removeAll'>remove all</button>
 </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { resourceUnpack } from 'utils/func'
+const {prefix} = require('store/modules/foo')
 
 export default {
-
-  name: 'component_name',
-
+  name: 'foo',
   computed: {
-    ...mapGetters({
-      items: 'foo_items'
-    })
+    ...mapGetters(resourceUnpack({
+      items: 'items'
+    }, prefix))
   },
 
   methods: {
-    ...mapActions([
-      'foo_add'
-    ])
+    ...mapActions(resourceUnpack([
+      'add'
+    ], prefix)),
+
+    removeAll() {
+      this.$store.dispatch('foo_removeAll', 1)
+    }
   }
 }
 </script>

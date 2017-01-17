@@ -31,3 +31,13 @@ export function resourceMapping(resource, prefix = '') {
     return ret
   }, {})
 }
+
+export function resourceUnpack(resource, prefix = '') {
+  if (_.isArray(resource)) {
+    return resource.map(resource => prefix + resource)
+  }
+  return _.reduce(resource, (ret, key, value) => {
+    ret[key] = prefix + value
+    return ret
+  }, {})
+}

@@ -7,25 +7,35 @@ const state = {
 }
 
 const getters = {
-  ...resourceMapping({
-    items: state => state.items
-  }, prefix)
+  items: state => state.items
 }
 
-const actions = {
-  ...resourceMapping({
-    add({ commit }, item) {
-      commit(types.add, item)
-    }
-  }, prefix)
-}
+const actions = {}
 
-const mutations = {
-  [types.add] (state, item) {
-    state.items.push(item)
-  }
-}
+const mutations = {}
 
-export default {
-  state, getters, actions, mutations
+// -- add item
+actions.add = ({ commit }, item) => {
+  commit(types.add, item)
+}
+mutations[types.add] = (state, item) => {
+  state.items.push(item)
+}
+//
+
+// -- remove all
+actions.removeAll = ({ commit }) => {
+  commit(types.removeAll)
+}
+mutations[types.removeAll] = (state) => {
+  state.items = []
+}
+//
+
+module.exports = {
+  state,
+  getters: resourceMapping(getters, prefix),
+  actions: resourceMapping(actions, prefix),
+  mutations,
+  prefix
 }
