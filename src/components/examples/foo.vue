@@ -9,22 +9,21 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-import { resourceUnpack } from 'utils/func'
+import { resourceMapGetters, resourceMapActions } from 'utils/func'
 const {prefix} = require('store/modules/foo')
 
 export default {
   name: 'foo',
   computed: {
-    ...mapGetters(resourceUnpack({
+    ...resourceMapGetters({
       items: 'items'
-    }, prefix))
+    }, prefix)
   },
 
   methods: {
-    ...mapActions(resourceUnpack([
+    ...resourceMapActions([
       'add'
-    ], prefix)),
+    ], prefix),
 
     removeAll() {
       this.$store.dispatch('foo_removeAll', 1)
