@@ -1,6 +1,21 @@
 import {sprintf} from 'sprintf-js'
 import { mapGetters, mapActions } from 'vuex'
 
+export function genCursorUrlData(code, fontSize) {
+  let canvas = document.createElement('canvas')
+  canvas.width = fontSize
+  canvas.height = fontSize
+  let ctx = canvas.getContext('2d')
+  ctx.fillStyle = '#000000'
+  ctx.font = fontSize + 'px FontAwesome'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'middle'
+  ctx.fillText(code, fontSize/2, fontSize/2)
+  var dataURL = canvas.toDataURL('image/png')
+
+  return dataURL
+}
+
 export function percent(val) {
   return sprintf('%0.1f%%', val * 100)
 }
@@ -35,7 +50,10 @@ export function resourceMapping(resource, prefix = '') {
 
 export function resourceUnpack(resource, prefix = '') {
   if (_.isArray(resource)) {
-    return resource.map(resource => prefix + resource)
+    return _.reduce(resource, (ret, r) => {
+      ret[r] = prefix + r
+      return ret
+    }, {})
   }
   return _.reduce(resource, (ret, key, value) => {
     ret[key] = prefix + value
@@ -48,5 +66,16 @@ export function resourceMapGetters(resource, prefix) {
 }
 
 export function resourceMapActions(resource, prefix) {
-  mapActions(resourceUnpack(resource, prefix))
+  return mapActions(resourceUnpack(resource, prefix))
 }
+
+export function generateGetterCluster(state) {
+  return _.reduce(_.keys(state), (ret, key) => {
+    ret[key] = state => {
+      console.log(state)
+      return state[key]
+    }
+    return ret
+  }, {})
+}
+

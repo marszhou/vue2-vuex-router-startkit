@@ -1,5 +1,5 @@
 import {foo as types} from '../mutation-types'
-import {resourceMapping} from 'utils/func'
+import {resourceMapping, generateGetterCluster} from 'utils/func'
 
 const prefix = 'foo_'
 const state = {
@@ -7,7 +7,7 @@ const state = {
 }
 
 const getters = {
-  items: state => state.items
+  ...generateGetterCluster(state)
 }
 
 const actions = {}

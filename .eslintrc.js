@@ -21,8 +21,9 @@ module.exports = {
     'object-property-newline': 0,
     'no-undef': 0,
     'no-multiple-empty-lines': 1,
-    'eol-last': 1,
+    'eol-last': 0,
     'comma-dangle': 0,
+    'space-infix-ops': 0,
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
   }
